@@ -2,6 +2,8 @@ import requests
 import pandas as pd
 from datetime import datetime as dt
 import pytz
+from source_generate.path_config import ROOT_DIR
+import os
 
 
 
@@ -33,6 +35,7 @@ for city in city_list:
     wd['city']=loc.get("name")
 
     cc['weather_time'] = wd.get("last_updated")
+    cc['city'] = loc.get("name")
     
     location.append(loc)
     current_condition.append(cc)
@@ -42,15 +45,23 @@ for city in city_list:
 loc_df = pd.DataFrame(location)
 cc_df = pd.DataFrame(current_condition)
 wd_df = pd.DataFrame(weather_details)
-print(loc_df)
-print(cc_df)
-print(wd_df)
+#print(loc_df)
+#print(cc_df)
+#print(wd_df)
 
 utc_time = dt.now(pytz.timezone('utc'))
 
 file_path = utc_time.strftime('%Y%m%d%H%M%S')
 
+folder_path = os.path.join(ROOT_DIR,'inbound_weather_data'
+             ,utc_time.strftime('%Y')
+             ,utc_time.strftime('%m')
+             ,utc_time.strftime('%d')
+             ,utc_time.strftime('%H')
+             )
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
 
-loc_df.to_csv("LOCATION_DTL_"+file_path+".csv", index=None)
-cc_df.to_csv("CURRENT_CONDITION_DTL_"+file_path+".csv", index=None)
-wd_df.to_csv("WEATHER_DETAILS_DTL_"+file_path+".csv", index=None)
+loc_df.to_csv(os.path.join(folder_path,"LOCATION_DTL_"+file_path+".csv"), index=None)
+cc_df.to_csv(os.path.join(folder_path,"CURRENT_CONDITION_DTL_"+file_path+".csv"), index=None)
+wd_df.to_csv(os.path.join(folder_path,"WEATHER_DETAILS_DTL_"+file_path+".csv"), index=None)
