@@ -1,0 +1,11 @@
+text,icon,code,weather_time,city
+Mist,//cdn.weatherapi.com/weather/64x64/day/143.png,1030,2023-11-26 11:15,Chennai
+Mist,//cdn.weatherapi.com/weather/64x64/day/143.png,1030,2023-11-26 11:15,Mumbai
+Patchy rain possible,//cdn.weatherapi.com/weather/64x64/day/176.png,1063,2023-11-26 11:15,Pune
+Patchy rain possible,//cdn.weatherapi.com/weather/64x64/day/176.png,1063,2023-11-26 11:15,Hyderabad
+Partly cloudy,//cdn.weatherapi.com/weather/64x64/day/116.png,1003,2023-11-26 11:15,Bengaluru
+Patchy rain possible,//cdn.weatherapi.com/weather/64x64/day/176.png,1063,2023-11-26 11:15,Surat
+Mist,//cdn.weatherapi.com/weather/64x64/day/143.png,1030,2023-11-26 11:15,Kolkata
+Moderate or heavy rain with thunder,//cdn.weatherapi.com/weather/64x64/day/389.png,1276,2023-11-26 11:15,Ahmedabad
+Sunny,//cdn.weatherapi.com/weather/64x64/day/113.png,1000,2023-11-26 11:15,Visakhapatnam
+Partly cloudy,//cdn.weatherapi.com/weather/64x64/day/116.png,1003,2023-11-26 11:15,Madurai

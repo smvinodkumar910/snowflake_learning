@@ -20,6 +20,7 @@ $$
           current_timestamp() as tgt_update_dt,
           TRY_TO_GEOGRAPHY('POINT('||lon||' '||lat||')') as city_location
           FROM WEATHER_DB_VM.RAW_WEATHER_VM.RAW_LOCATION_DTL
+          WHERE EXISTS (SELECT 1 FROM WEATHER_DB_VM.RAW_WEATHER_VM.RAW_LOCATION_DTL_STREAM )
           ) SRC ON (TGT.integration_id = src.integration_id)
           WHEN MATCHED THEN UPDATE SET
           TGT.INTEGRATION_ID = SRC.INTEGRATION_ID,
@@ -63,6 +64,9 @@ $$
     
     var merge = snowflake.createStatement( {sqlText: merge_statement} );
     var result_set1 = merge.execute();
+
+    var truncate = snowflake.createStatement( {sqlText: 'TRUNCATE TABLE WEATHER_DB_VM.RAW_WEATHER_VM.RAW_LOCATION_DTL;'} );
+    var result = truncate.execute();
     
 $$
 ;

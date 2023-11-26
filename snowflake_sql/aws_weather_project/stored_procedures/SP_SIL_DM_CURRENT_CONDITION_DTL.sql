@@ -16,6 +16,7 @@ $$
             CURRENT_TIMESTAMP() AS TGT_INSERT_DT,
             CURRENT_TIMESTAMP() AS TGT_UPDATE_DT
           FROM WEATHER_DB_VM.RAW_WEATHER_VM.RAW_CURRENT_CONDITION_DTL
+          WHERE EXISTS (SELECT 1 FROM WEATHER_DB_VM.RAW_WEATHER_VM.RAW_CURRENT_CONDITION_DTL_STREAM )
           ) SRC ON (TGT.integration_id = src.integration_id)
           WHEN MATCHED THEN UPDATE SET
             TGT.INTEGRATION_ID = SRC.INTEGRATION_ID,
@@ -49,6 +50,9 @@ $$
     
     var merge = snowflake.createStatement( {sqlText: merge_statement} );
     var result_set1 = merge.execute();
+
+    var truncate = snowflake.createStatement( {sqlText: 'TRUNCATE TABLE WEATHER_DB_VM.RAW_WEATHER_VM.RAW_CURRENT_CONDITION_DTL;'} );
+    var result = truncate.execute();
     
 $$
 ;
