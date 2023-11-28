@@ -4,6 +4,8 @@ from datetime import datetime as dt
 import pytz
 from source_generate.path_config import ROOT_DIR
 import os
+import boto3
+from io import BytesIO
 
 
 
@@ -45,9 +47,7 @@ for city in city_list:
 loc_df = pd.DataFrame(location)
 cc_df = pd.DataFrame(current_condition)
 wd_df = pd.DataFrame(weather_details)
-#print(loc_df)
-#print(cc_df)
-#print(wd_df)
+
 
 utc_time = dt.now(pytz.timezone('utc'))
 
@@ -59,9 +59,34 @@ folder_path = os.path.join(ROOT_DIR,'inbound_weather_data'
              ,utc_time.strftime('%d')
              ,utc_time.strftime('%H')
              )
+
+target_path = 'inbound_weather_data/'+utc_time.strftime('%Y')+'/'+utc_time.strftime('%m')+'/'+utc_time.strftime('%d')+'/'+utc_time.strftime('%H')
+             
+
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
 
-loc_df.to_csv(os.path.join(folder_path,"LOCATION_DTL_"+file_path+".csv"), index=None)
+loc_df.to_csv(os.path.join(folder_path,"LOCATION_DTL_"+file_path+".csv"), index=None, encoding='utf-8')
 cc_df.to_csv(os.path.join(folder_path,"CURRENT_CONDITION_DTL_"+file_path+".csv"), index=None)
 wd_df.to_csv(os.path.join(folder_path,"WEATHER_DETAILS_DTL_"+file_path+".csv"), index=None)
+
+
+s3 = boto3.client(
+    service_name='s3',
+    region_name='ap-southeast-1',
+    aws_access_key_id='',
+    aws_secret_access_key=''   
+)
+
+with open(os.path.join(folder_path,"LOCATION_DTL_"+file_path+".csv"), 'rb') as f1:
+    s3.upload_fileobj(f1,'snowflake-stg-bucket-1',target_path+"/LOCATION_DTL_"+file_path+".csv")
+
+
+with open(os.path.join(folder_path,"CURRENT_CONDITION_DTL_"+file_path+".csv"), 'rb') as f2:
+    s3.upload_fileobj(f2,'snowflake-stg-bucket-1',target_path+"/CURRENT_CONDITION_DTL_"+file_path+".csv")
+
+
+with open(os.path.join(folder_path,"WEATHER_DETAILS_DTL_"+file_path+".csv"), 'rb') as f3:
+    s3.upload_fileobj(f3,'snowflake-stg-bucket-1',target_path+"/WEATHER_DETAILS_DTL_"+file_path+".csv")
+
+

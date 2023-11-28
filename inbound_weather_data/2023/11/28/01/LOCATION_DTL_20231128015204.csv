@@ -1,0 +1,11 @@
+name,region,country,lat,lon,tz_id,localtime_epoch,localtime
+Chennai,Tamil Nadu,India,13.08,80.28,Asia/Kolkata,1701136166,2023-11-28 7:19
+Mumbai,Maharashtra,India,18.98,72.83,Asia/Kolkata,1701136115,2023-11-28 7:18
+Pune,Maharashtra,India,18.53,73.87,Asia/Kolkata,1701136116,2023-11-28 7:18
+Hyderabad,Andhra Pradesh,India,17.38,78.47,Asia/Kolkata,1701136117,2023-11-28 7:18
+Bengaluru,Karnataka,India,12.98,77.58,Asia/Kolkata,1701136117,2023-11-28 7:18
+Surat,Gujarat,India,20.97,72.9,Asia/Kolkata,1701136118,2023-11-28 7:18
+Kolkata,West Bengal,India,22.57,88.37,Asia/Kolkata,1701136118,2023-11-28 7:18
+Ahmedabad,Gujarat,India,23.03,72.62,Asia/Kolkata,1701136076,2023-11-28 7:17
+Visakhapatnam,Andhra Pradesh,India,17.7,83.3,Asia/Kolkata,1701136120,2023-11-28 7:18
+Madurai,Tamil Nadu,India,9.93,78.12,Asia/Kolkata,1701136122,2023-11-28 7:18
