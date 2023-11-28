@@ -19,7 +19,7 @@ AND NAME ='DM_CURRENT_CONDITION_DTL_TASK';
 --LIMIT 10;
 
 --To view now pipe status -- latest file details 
-select SYSTEM$PIPE_STATUS('RAW_LOCATION_DTL_PIPE');
+select SYSTEM$PIPE_STATUS('RAW_WEATHER_VM.RAW_LOCATION_DTL_PIPE');
 
 
 --to view tasks available
